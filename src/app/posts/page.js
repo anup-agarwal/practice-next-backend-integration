@@ -1,16 +1,8 @@
-"use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
-export default function Home() {
-  const [data, setData] = useState([])
-  useEffect(() => {
-    const fun = async () => {
-      const data = await fetch("/api/posts")
-      setData(await data.json())
-    }
-    fun()
-  }, [])
+export default async function Home() {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`)
+  const data = (await response.json())
 
   return <ul>
     {data.map(({ id, title }) => <li key={id}>

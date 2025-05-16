@@ -1,19 +1,9 @@
-"use client";
+import React from 'react'
 
-import React, { useEffect, useState } from 'react'
-
-const Page = ({ params }) => {
-  const [data, setData] = useState(null)
-  const { id } = React.use(params)
-
-  useEffect(() => {
-    async function fun() {
-      const response = await fetch(`/api/posts/${id}`)
-      const data = await response.json()
-      setData(data)
-    }
-    fun()
-  }, [id])
+const Page = async ({ params }) => {
+  const { id } = params
+  const response = await fetch(`/api/posts/${id}`)
+  const data = await response.json()
 
   return data && (
     <div>
